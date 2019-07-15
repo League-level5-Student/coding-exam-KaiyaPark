@@ -21,6 +21,32 @@ public class CodingExamA {
 		 * 
 		 * See the Coding_Exam_A_Demo.jar for an example of what the finished product should look like.
 		 */
-
+		CodingExamA c = new CodingExamA();
 	}
+	CodingExamA(){
+		int numBots = Integer.parseInt(JOptionPane.showInputDialog("Number of Robots"));
+		String color = JOptionPane.showInputDialog("Color of shapes(red or blue)");
+		int sides = Integer.parseInt(JOptionPane.showInputDialog("Number of sides"));
+		for (int i = 0; i < numBots; i++) {
+			int x = i*25*sides+100;
+			Thread t = new Thread(()->{
+				Robot r = new Robot();
+				r.setX(x);
+				r.setY(100);
+				r.penDown();
+				r.setSpeed(100);
+				if (color.equals("red")) {
+					r.setPenColor(Color.RED);
+				}
+				else {
+					r.setPenColor(Color.BLUE);
+				}
+				for (int j = 0; j < sides; j++) {
+					r.turn(360/sides);
+					r.move(50);
+				}
+			});
+			t.start();
+	}
+}
 }
